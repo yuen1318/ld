@@ -6,6 +6,10 @@
     <title>Lingkod | Lord's Day Celebration</title>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        html {
+            font-size: 100%;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -61,7 +65,6 @@
             flex-direction: column;
         }
 
-        /* Header */
         .app-header {
             position: sticky;
             top: 0;
@@ -106,14 +109,23 @@
             font-family: inherit;
             white-space: nowrap;
         }
-        .back-btn-header:hover {
-            background: hsl(var(--primary) / 0.1);
-            border-color: hsl(var(--primary) / 0.4);
-        }
         .app-header-right {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
+        }
+        .zoom-btn {
+            background: hsl(var(--secondary));
+            border: 1px solid hsl(var(--border));
+            border-radius: 2rem;
+            padding: 0.4rem 0.85rem;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            color: hsl(var(--foreground));
+            transition: all 0.2s ease;
+            font-family: inherit;
+            line-height: 1;
         }
         .theme-toggle-btn {
             background: hsl(var(--toggle-bg));
@@ -123,7 +135,6 @@
             height: 28px;
             cursor: pointer;
             position: relative;
-            transition: background-color 0.35s ease;
             flex-shrink: 0;
             outline: none;
             box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.08);
@@ -146,11 +157,10 @@
             transform: translateX(24px);
         }
 
-        /* Main container */
         .main-container {
-            max-width: 680px;
+            max-width: 720px;
             margin: 0 auto;
-            padding: 24px 16px 40px;
+            padding: 20px 16px 40px;
             width: 100%;
             flex: 1;
         }
@@ -172,7 +182,6 @@
             box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.06);
             width: 100%;
             max-width: 480px;
-            transition: background 0.3s, border 0.3s;
         }
         .home-card h1 {
             font-size: 1.5rem;
@@ -203,14 +212,12 @@
             font-weight: 600;
             font-size: 0.9rem;
             cursor: pointer;
-            transition: all 0.2s;
             background: transparent;
             color: hsl(var(--foreground));
         }
         .type-option.active {
             background: hsl(var(--primary));
             color: white;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         }
         .form-group {
             margin-bottom: 22px;
@@ -250,12 +257,8 @@
             transition: all 0.2s;
             margin-top: 8px;
         }
-        .begin-btn:hover {
-            filter: brightness(0.94);
-            transform: translateY(-1px);
-        }
 
-        /* Liturgy view */
+        /* Liturgy view - no card wrapper, just clean blocks */
         .liturgy-view {
             display: none;
             animation: fadeIn 0.3s ease;
@@ -267,15 +270,9 @@
             from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .liturgy-card {
-            background: hsl(var(--card));
-            border: 1px solid hsl(var(--border));
-            border-radius: 1.5rem;
-            padding: 1.2rem;
-        }
         .season-indicator {
             text-align: center;
-            margin-bottom: 16px;
+            margin-bottom: 24px;
         }
         .season-tag {
             display: inline-block;
@@ -287,77 +284,76 @@
             border: 1px solid hsl(var(--border));
         }
         .role-block {
-    padding: 1rem 1.1rem;
-    margin-bottom: 0.8rem;
-    border-radius: 0.9rem;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-.role-assistant {
-    border-left: 4px solid #6b7280;
-    background: rgba(107, 114, 128, 0.07);
-}
-.role-leader {
-    border-left: 4px solid #9ca3af;
-    background: rgba(156, 163, 175, 0.07);
-}
-.role-group {
-    border-left: 4px solid #d1d5db;
-    background: rgba(209, 213, 219, 0.07);
-}
-.dark .role-assistant { background: rgba(107, 114, 128, 0.12); }
-.dark .role-leader { background: rgba(156, 163, 175, 0.1); }
-.dark .role-group { background: rgba(209, 213, 219, 0.06); }
+            padding: 1rem 1.2rem;
+            margin-bottom: 1rem;
+            border-radius: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+        .role-assistant {
+            border-left: 4px solid #6b7280;
+            background: rgba(107, 114, 128, 0.05);
+        }
+        .role-leader {
+            border-left: 4px solid #9ca3af;
+            background: rgba(156, 163, 175, 0.05);
+        }
+        .role-group {
+            border-left: 4px solid #d1d5db;
+            background: rgba(209, 213, 219, 0.05);
+        }
+        .dark .role-assistant { background: rgba(107, 114, 128, 0.1); }
+        .dark .role-leader { background: rgba(156, 163, 175, 0.08); }
+        .dark .role-group { background: rgba(209, 213, 219, 0.05); }
 
-.role-badge {
-    display: inline-block;
-    font-size: 0.68rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    padding: 0.2rem 0.7rem;
-    border-radius: 2rem;
-    margin-bottom: 0.5rem;
-    letter-spacing: 0.04em;
-}
-.badge-assistant {
-    background: #6b728022;
-    color: #6b7280;
-}
-.badge-leader {
-    background: #9ca3af22;
-    color: #9ca3af;
-}
-.badge-group {
-    background: #d1d5db30;
-    color: #9ca3af;
-}
-.dark .badge-assistant {
-    background: #6b728044;
-    color: #cbd5e1;
-}
-.dark .badge-leader {
-    background: #9ca3af38;
-    color: #cbd5e1;
-}
-.dark .badge-group {
-    background: #d1d5db24;
-    color: #cbd5e1;
-}
-.role-text {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    white-space: pre-line;
-}
-.instruction {
-    background: hsl(var(--muted));
-    padding: 0.75rem 1.1rem;
-    border-radius: 0.9rem;
-    font-style: italic;
-    font-size: 0.85rem;
-    margin-bottom: 0.8rem;
-    border-left: 3px solid hsl(var(--primary));
-    color: hsl(var(--muted-foreground));
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
+        .role-badge {
+            display: inline-block;
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 0.2rem 0.7rem;
+            border-radius: 2rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.04em;
+        }
+        .badge-assistant {
+            background: #6b728022;
+            color: #6b7280;
+        }
+        .badge-leader {
+            background: #9ca3af22;
+            color: #9ca3af;
+        }
+        .badge-group {
+            background: #d1d5db30;
+            color: #9ca3af;
+        }
+        .dark .badge-assistant {
+            background: #6b728044;
+            color: #cbd5e1;
+        }
+        .dark .badge-leader {
+            background: #9ca3af38;
+            color: #cbd5e1;
+        }
+        .dark .badge-group {
+            background: #d1d5db24;
+            color: #cbd5e1;
+        }
+        .role-text {
+            font-size: 0.95rem;
+            line-height: 1.65;
+            white-space: pre-line;
+        }
+        .instruction {
+            background: hsl(var(--muted));
+            padding: 0.85rem 1.2rem;
+            border-radius: 0.9rem;
+            font-style: italic;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            border-left: 3px solid hsl(var(--primary));
+            color: hsl(var(--muted-foreground));
+        }
         footer {
             text-align: center;
             font-size: 0.7rem;
@@ -369,10 +365,10 @@
         @media (max-width: 500px) {
             .home-card { padding: 24px 16px; }
             .role-text { font-size: 0.88rem; }
-            .type-option { font-size: 0.8rem; }
+            .role-block { padding: 0.85rem 1rem; }
         }
         @media print {
-            .app-header, .season-indicator, .home-screen, footer { display: none; }
+            .app-header, .home-screen, footer { display: none; }
             .liturgy-view { display: block; }
         }
     </style>
@@ -382,9 +378,11 @@
 <header class="app-header">
     <div class="app-header-left">
         <span class="home-logo" id="homeLogo">🍞🍷</span>
-        <button class="back-btn-header" id="backBtnHeader" style="display: none;">← Back to Home</button>
+        <button class="back-btn-header" id="backBtnHeader" style="display: none;">⬅</button>
     </div>
     <div class="app-header-right">
+        <button class="zoom-btn" id="zoomOutBtn" title="Decrease font size">A−</button>
+        <button class="zoom-btn" id="zoomInBtn" title="Increase font size">A+</button>
         <button class="theme-toggle-btn" id="themeToggle" aria-label="Dark mode">
             <span class="theme-toggle-dot" id="themeToggleDot">☀️</span>
         </button>
@@ -392,17 +390,14 @@
 </header>
 
 <div class="main-container">
-    <!-- HOME SCREEN -->
     <div class="home-screen" id="homeScreen">
         <div class="home-card">
             <h1>Lord's Day Celebration</h1>
             <p class="subtitle">Guide for celebrating the Lord's day</p>
-            
             <div class="type-selector" id="ceremonyTypeSelector">
                 <div class="type-option active" data-type="opening">Opening Ceremony</div>
                 <div class="type-option" data-type="closing">Closing Ceremony</div>
             </div>
-
             <form id="celebrationForm">
                 <div class="form-group" id="seasonGroup">
                     <label for="seasonSelect">Liturgical Season (Opening only)</label>
@@ -419,12 +414,11 @@
         </div>
     </div>
 
-    <!-- LITURGY VIEW -->
     <div class="liturgy-view" id="liturgyView">
         <div class="season-indicator">
             <span class="season-tag" id="seasonTag">Opening · Ordinary Time</span>
         </div>
-        <div id="liturgyContainer" class="liturgy-card"></div>
+        <div id="liturgyContainer"></div> <!-- no extra card, just a container -->
     </div>
 
     <footer>Celebrating the Lord's day</footer>
@@ -523,30 +517,20 @@
         return [...openingCeremony, ...winePart, ...blessingBread, ...afterMeal];
     }
 
-    // ----------------------------------------------
-    //  CLOSING CEREMONY (from lines 1863-1883, fixed text)
-    // ----------------------------------------------
+    // CLOSING CEREMONY
     const closingCeremony = [
         { role: "leader", text: "Blessed be the Lord God of Israel, for he has visited and redeemed his people, and has raised up a horn of salvation for us in the house of his servant David, as he spoke by the mouth of his holy prophets from of old, that we should be saved from our enemies, and from the hand of all who hate us; to perform the mercy promised to our fathers, and to remember his holy covenant, the oath which he swore to our father Abraham, to grant us that we, being delivered from the hand of our enemies, might serve him without fear, in holiness and righteousness before Him all the days of our life. For the day has dawned upon us from on high to give light to those who sit in darkness and in the shadow of death, to guide our feet into the way of peace. (Luke 1:68-79)" },
         { type: "instruction", text: "The Leader pours a cup of wine and recites the following blessing:" },
-        { role: "leader", text: "Behold, God is my salvation." },
-        { role: "group", text: "I will trust and will not be afraid." },
-        { role: "leader", text: "For God the Lord is my strength and song." },
-        { role: "group", text: "And he has become my salvation." },
-        { role: "leader", text: "Therefore with joy you will draw water from the wells of salvation. Salvation belongs to the Lord." },
-        { role: "group", text: "Your blessing be upon your people." },
-        { role: "leader", text: "The Lord of Hosts is with us." },
-        { role: "group", text: "The God of Jacob is our refuge." },
-        { role: "leader", text: "God's people had light and joy and gladness and honor." },
-        { role: "group", text: "So be it with us." },
-        { role: "leader", text: "I will lift the cup of salvation and call upon the Name of the Lord. Blessed are you, Lord our God, King of the Universe, who have created the fruit of the vine." },
-        { role: "group", text: "Amen." },
+        { role: "leader", text: "Behold, God is my salvation." }, { role: "group", text: "I will trust and will not be afraid." },
+        { role: "leader", text: "For God the Lord is my strength and song." }, { role: "group", text: "And he has become my salvation." },
+        { role: "leader", text: "Therefore with joy you will draw water from the wells of salvation. Salvation belongs to the Lord." }, { role: "group", text: "Your blessing be upon your people." },
+        { role: "leader", text: "The Lord of Hosts is with us." }, { role: "group", text: "The God of Jacob is our refuge." },
+        { role: "leader", text: "God's people had light and joy and gladness and honor." }, { role: "group", text: "So be it with us." },
+        { role: "leader", text: "I will lift the cup of salvation and call upon the Name of the Lord. Blessed are you, Lord our God, King of the Universe, who have created the fruit of the vine." }, { role: "group", text: "Amen." },
         { type: "instruction", text: "The Leader drinks from the cup, passes it, and takes the bread. He then recites the following blessing:" },
-        { role: "leader", text: "Blessed are you, Lord our God, King of the Universe, who bring forth bread from the earth." },
-        { role: "group", text: "Amen." },
+        { role: "leader", text: "Blessed are you, Lord our God, King of the Universe, who bring forth bread from the earth." }, { role: "group", text: "Amen." },
         { type: "instruction", text: "The Leader distributes the bread to the others present and begins the meal." },
-        { role: "leader", text: "Blessed are You, Lord our God, King of the Universe, who sanctify us through faith in the resurrection of Christ and bless us in this day set apart to celebrate His victory. Blessed are you, Lord our God, who have given us new life in your Son." },
-        { role: "group", text: "Amen." },
+        { role: "leader", text: "Blessed are You, Lord our God, King of the Universe, who sanctify us through faith in the resurrection of Christ and bless us in this day set apart to celebrate His victory. Blessed are you, Lord our God, who have given us new life in your Son." }, { role: "group", text: "Amen." },
         { type: "instruction", text: "The Leader drinks from the cup, passes it, and recites the following prayer while the cup is being passed." },
         { role: "leader", text: "Father in Heaven, grant that we may begin the working days which draw near to us in peace; freed from all sin and transgression, filled with the joy of Your Holy Spirit, and following in the ways of Your Son Jesus. May we be fully clothed in him, the New Man, created after your likeness in true righteousness and holiness. Father of Mercy, bless and prosper the work of our hands. Make us fruitful in every good work, unweary in well-doing, knowing that in Christ our labor is not in vain. May all that we do, in word or deed, be to the praise of your glory through Jesus your Son. Our God and King, guide and defend the people called by Your Name. Strengthen and prosper all who cherish thoughts of good towards your people, and fulfill their purposes, but frustrate those who devise evil plans against your people, and make their designs of no effect; as it is said, 'Take counsel together, but it will come to nothing; speak a word, but it will not stand, for God is with us' (Isaiah 8:10). Open to us, Father of Mercies and Lord of Forgiveness, in this week and in the weeks to come, the gates of heavenly help and rejoicing, of holiness and peace, of the study of your teaching and of prayer. In us also let the Scripture be fulfilled: How beautiful on the mountains are the feet of him who brings good news, who heralds peace, brings happiness, proclaims salvation, who says to Zion, 'Your God reigns.' (Isaiah 52:7)" },
         { role: "group", text: "Amen." },
@@ -574,7 +558,7 @@
         return merged;
     }
 
-    function renderLiturgy(blocks, seasonLabel = "Opening · Ordinary Time") {
+    function renderLiturgy(blocks, seasonLabel) {
         const container = document.getElementById('liturgyContainer');
         const tagSpan = document.getElementById('seasonTag');
         tagSpan.textContent = seasonLabel;
@@ -605,27 +589,21 @@
         }
     }
 
-    // UI state
-    let currentType = 'opening'; // 'opening' or 'closing'
+    // UI logic
+    let currentType = 'opening';
     const homeScreen = document.getElementById('homeScreen');
     const liturgyView = document.getElementById('liturgyView');
     const backBtn = document.getElementById('backBtnHeader');
     const homeLogo = document.getElementById('homeLogo');
     const seasonGroup = document.getElementById('seasonGroup');
     const seasonSelect = document.getElementById('seasonSelect');
-    const beginBtn = document.getElementById('beginBtn');
     const typeOptions = document.querySelectorAll('.type-option');
     const celebrationForm = document.getElementById('celebrationForm');
 
     function updateHomeUI() {
-        if (currentType === 'opening') {
-            seasonGroup.style.display = 'block';
-        } else {
-            seasonGroup.style.display = 'none';
-        }
+        seasonGroup.style.display = currentType === 'opening' ? 'block' : 'none';
         typeOptions.forEach(opt => {
-            if (opt.dataset.type === currentType) opt.classList.add('active');
-            else opt.classList.remove('active');
+            opt.classList.toggle('active', opt.dataset.type === currentType);
         });
     }
 
@@ -641,7 +619,7 @@
         liturgyView.classList.remove('active');
         homeLogo.style.display = '';
         backBtn.style.display = 'none';
-        window.scrollTo(0,0);
+        window.scrollTo(0, 0);
         updateHomeUI();
     }
 
@@ -654,7 +632,7 @@
         liturgyView.classList.add('active');
         homeLogo.style.display = 'none';
         backBtn.style.display = 'inline-flex';
-        window.scrollTo(0,0);
+        window.scrollTo(0, 0);
     }
 
     function showLiturgyForClosing() {
@@ -664,42 +642,48 @@
         liturgyView.classList.add('active');
         homeLogo.style.display = 'none';
         backBtn.style.display = 'inline-flex';
-        window.scrollTo(0,0);
+        window.scrollTo(0, 0);
     }
 
     celebrationForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        if (currentType === 'opening') {
-            const season = seasonSelect.value;
-            showLiturgyForOpening(season);
-        } else {
-            showLiturgyForClosing();
-        }
+        if (currentType === 'opening') showLiturgyForOpening(seasonSelect.value);
+        else showLiturgyForClosing();
     });
 
     backBtn.addEventListener('click', showHome);
 
-    // Theme toggle
+    // Theme
     const themeToggle = document.getElementById('themeToggle');
     const toggleDot = document.getElementById('themeToggleDot');
     function applyTheme(isDark) {
-        if (isDark) {
-            document.documentElement.classList.add('dark');
-            toggleDot.textContent = '🌙';
-        } else {
-            document.documentElement.classList.remove('dark');
-            toggleDot.textContent = '☀️';
-        }
+        document.documentElement.classList.toggle('dark', isDark);
+        toggleDot.textContent = isDark ? '🌙' : '☀️';
     }
-    let stored = localStorage.getItem('lingkod_theme');
-    let prefers = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    let isDark = stored === 'dark' || (stored === null && prefers);
-    applyTheme(isDark);
+    let storedTheme = localStorage.getItem('lingkod_theme');
+    let prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    let isDarkMode = storedTheme === 'dark' || (storedTheme === null && prefersDark);
+    applyTheme(isDarkMode);
     themeToggle.addEventListener('click', () => {
-        isDark = !isDark;
-        applyTheme(isDark);
-        localStorage.setItem('lingkod_theme', isDark ? 'dark' : 'light');
+        isDarkMode = !isDarkMode;
+        applyTheme(isDarkMode);
+        localStorage.setItem('lingkod_theme', isDarkMode ? 'dark' : 'light');
     });
+
+    // Zoom
+    const zoomInBtn = document.getElementById('zoomInBtn');
+    const zoomOutBtn = document.getElementById('zoomOutBtn');
+    let currentZoom = 1.0;
+    function setZoom(zoom) {
+        currentZoom = Math.min(1.5, Math.max(0.8, zoom));
+        document.documentElement.style.fontSize = `${currentZoom * 100}%`;
+        localStorage.setItem('lingkod_zoom', currentZoom.toString());
+    }
+    const savedZoom = localStorage.getItem('lingkod_zoom');
+    if (savedZoom) setZoom(parseFloat(savedZoom));
+    else setZoom(1.0);
+    zoomInBtn.addEventListener('click', () => setZoom(currentZoom + 0.1));
+    zoomOutBtn.addEventListener('click', () => setZoom(currentZoom - 0.1));
 
     showHome();
 </script>
